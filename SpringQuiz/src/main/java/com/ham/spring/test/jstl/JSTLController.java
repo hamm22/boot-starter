@@ -91,4 +91,35 @@ public class JSTLController {
 		
 		return "jstl/test04";
 	}
+	
+	@GetMapping("/test05")
+	public String test05(Model model){
+		
+		List<Map<String, Object>> cardBills = new ArrayList<>();
+
+		Map<String, Object> cardBill = new HashMap<>();
+		cardBill.put("store", "GS48");
+		cardBill.put("pay", 7800);
+		cardBill.put("date", "2025-09-14");
+		cardBill.put("installment", "일시불");
+		cardBills.add(cardBill);
+
+		cardBill = new HashMap<>();
+		cardBill.put("store", "현태백화점");
+		cardBill.put("pay", 2750000);
+		cardBill.put("date", "2025-09-18");
+		cardBill.put("installment", "3개월");
+		cardBills.add(cardBill);
+
+		cardBill = new HashMap<>();
+		cardBill.put("store", "요촌치킨");
+		cardBill.put("pay", 180000);
+		cardBill.put("date", "2025-09-20");
+		cardBill.put("installment", "일시불");
+		cardBills.add(cardBill);
+		
+		model.addAttribute("cardBills", cardBills);
+		
+		return "jstl/test05";
+	}
 }

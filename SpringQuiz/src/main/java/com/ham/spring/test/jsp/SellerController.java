@@ -55,6 +55,7 @@ public class SellerController {
 		// id 파라미터가 전달되지 않으면 가장 최근에 추가된 판매자 정보 조회
 		// Seller seller = sellerService.getLastSeller();
 		
+		model.addAttribute("seller", seller);
 		return "jsp/sellerInfo";
 	}
 	

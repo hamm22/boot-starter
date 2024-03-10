@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>날씨 목록</title>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-<link rel="stylesheet" href="/jstl/css/style.css" type="text/css">
+ <link rel="stylesheet" href="/jstl/css/style.css" type="text/css">
 </head>
 <body>
 
@@ -35,11 +35,11 @@
 	                <div class="d-flex justify-content-between ml-3 mt-5">
 	                    <div class="d-flex align-items-center">
 	                        <label class="input-lable">날짜</label> 
-	                        <input type="text" class="form-control" id="dateInput" name = "date">
+	                        <input type="text" class="form-control" id="dateInput" name="date">
 	                    </div>
 	                    <div class="d-flex align-items-center">
 	                        <label class="input-lable">날씨</label> 
-	                        <select class="form-control" name = "weather">
+	                        <select class="form-control" name="weather">
 	                            <option>맑음</option>
 	                            <option>구름조금</option>
 	                            <option>흐림</option>
@@ -49,7 +49,7 @@
 	
 	                    <div class="d-flex align-items-center">
 	                        <label class="input-lable">미세먼지</label> 
-	                        <select class="form-control" name ="microDust">
+	                        <select class="form-control" name="microDust">
 	                            <option>좋음</option>
 	                            <option>보통</option>
 	                            <option>나쁨</option>
@@ -71,7 +71,7 @@
 	                    <div class="d-flex align-items-center">
 	                        <label class="col-4">강수량</label> 
 	                        <div class="input-group">
-	                            <input type="text" class="form-control" name = "precipitation">
+	                            <input type="text" class="form-control" name="precipitation">
 	                                <div class="input-group-append">
 	                                    <span class="input-group-text">mm</span>
 	                            </div>
@@ -81,7 +81,7 @@
 	                    <div class="d-flex align-items-center">
 	                        <label class="col-3">풍속</label> 
 	                        <div class="input-group">
-	                            <input type="text" class="form-control" name ="windSpeed"> 
+	                            <input type="text" class="form-control" name="windSpeed"> 
 	                                <div class="input-group-append">
 	                                    <span class="input-group-text">km/h</span>
 	                            </div>
@@ -106,13 +106,20 @@
 		</footer>
 	</div>
 	
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-<!-- 	<script type="text/javascript"> -->
-<!-- 		$(document).ready(function(){ -->
-<!--  			$("dateInput").			 -->
-<!--  		}); -->
-<!-- 	</script> -->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+	$(document).ready(function() {
+		
+		$("#dateInput").datepicker({
+			dateFormat:"yy년 m월 d일"
+		});
+	});
+
+</script>
 </body>
 </html>

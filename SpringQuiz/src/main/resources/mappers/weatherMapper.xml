@@ -3,71 +3,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="com.ham.spring.test.jstl.repository.WeatherRepository">
- 
- 	<select id ="selectWeatherHistory"
- 	resultType="com.ham.spring.test.jstl.domain.Weather">
- 		SELECT
- 				`id`
- 			 , `date`	
-			 , `weather`
-			 , `temperatures`
-			 , `precipitation`
-			 , `microDust`
-			 , `windSpeed`	
- 			 , `createdAt`
- 			 , `updatedAt` 
- 			FROM
- 			`weatherhistory`
- 	</select>
- 	
- 	<insert id = "insertWeather"
- 		parameterType="map">
- 			INSERT INTO
- 				`weatherhistory`
- 			(
- 			 , `date`	
-			 , `weather`
-			 , `temperatures`
-			 , `precipitation`
-			 , `microDust`
-			 , `windSpeed`	
+<mapper namespace="com.ham.spring.test.jstl.repository.WeatherRepository">
 
- 			)
- 				
- 			VALUE
- 			(
- 			  #{date}	
-			 , #{weather}
-			 , #{temperatures}
-			 , #{precipitation}
-			 , #{microDust}
-			 , #{windSpeed}	
- 			)
- 			
- 	</insert>
- 	
- 	<insert id = "insertWeatherByObject" parameterType="com.ham.spring.test.jstl.domain.Weather">
-		 	INSERT INTO
- 				`weatherhistory`
- 			(
- 			 , `date`	
-			 , `weather`
-			 , `temperatures`
-			 , `precipitation`
-			 , `microDust`
-			 , `windSpeed`	
- 			)
- 				
- 			VALUE
- 			(
- 			  #{date}	
-			 , #{weather}
-			 , #{temperatures}
-			 , #{precipitation}
-			 , #{microDust}
-			 , #{windSpeed}	
- 			)
- 	</insert>
- 
- </mapper>
+	<select id="selectWeatherHistory" 
+	resultType="com.ham.spring.test.jstl.domain.Weather">
+		SELECT 
+			`id`
+			, `date`
+			, `weather`
+			, `temperatures`
+			, `precipitation`
+			, `microDust`
+			, `windSpeed`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`weatherhistory`
+	</select>
+	
+	<insert id="insertWeather" parameterType="map">
+		INSERT INTO
+			`weatherhistory`
+		(
+			`date`
+			, `weather`
+			, `temperatures`
+			, `precipitation`
+			, `microDust`
+			, `windSpeed`
+		)
+		VALUE
+		(
+			#{date}
+			, #{weather}
+			, #{temperatures}
+			, #{precipitation}
+			, #{microDust}
+			, #{windSpeed}
+		)
+	</insert>
+	
+	<insert id="insertWeatherByObject"
+	parameterType="com.ham.spring.test.jstl.domain.Weather">
+		INSERT INTO
+			`weatherhistory`
+		(
+			`date`
+			, `weather`
+			, `temperatures`
+			, `precipitation`
+			, `microDust`
+			, `windSpeed`
+		)
+		VALUE
+		(
+			#{date}
+			, #{weather}
+			, #{temperatures}
+			, #{precipitation}
+			, #{microDust}
+			, #{windSpeed}
+		)
+	</insert>
+
+</mapper>

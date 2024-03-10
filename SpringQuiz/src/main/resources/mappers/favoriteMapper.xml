@@ -15,6 +15,40 @@
 			, `updatedAt`
  		FROM
  			`favorite`
+ 		ORDER BY
+ 			`id` DESC
  	</select>
+ 	
+ 	<insert id = "insertFavorite" parameterType="map">
+ 		INSERT INTO
+ 			`favorite`
+ 			(
+ 				`name`
+ 				, `url`
+ 			)
+ 		VALUE
+ 		(
+ 			#{name}
+ 			, #{url}
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectCountByUrl" parameterType="string" resultType="int">
+ 		SELECT
+ 			count(*)
+ 		FROM
+ 			`favorite`
+ 		WHERE
+ 			`url` = #{url}		
+ 	</select>
+ 	
+ 	<delete id = "deleteFavorite" parameterType="int">
+ 		DELETE
+ 			
+ 		FROM
+ 			`favorite`
+ 		WHERE
+ 			`id` = #{id}	
+ 	</delete>
  
  </mapper>

@@ -16,7 +16,7 @@
 	        <div class="text-center display-4">통나무 팬션</div>
 	        <nav class="mt-4">
 	            <ul class="nav nav-fill">
-	                <li class="nav-item"><a class="nav-link" href="#">팬션소개</a></li>
+	                   <li class="nav-item"><a class="nav-link" href="#">팬션소개</a></li>
 	                <li class="nav-item"><a class="nav-link" href="#">객실보기</a></li>
 	                <li class="nav-item"><a class="nav-link" href="/ajax/booking/input">예약하기</a></li>
 	                <li class="nav-item"><a class="nav-link" href="/ajax/booking/list">예약목록</a></li>
@@ -40,24 +40,24 @@
 	                    <h3 class="mr-4">예약 확인</h3>
 	                
 	                </div>
+	            
 	
 	                <div class="no-member-input mt-3y" id="nonMember">
 	                    <div class="input-gorup form-inline">
 	                        <label class="input-label">이름 </label>
-	                        <input type="text" class="form-control text-input" id="name">
+	                        <input type="text" class="form-control text-input" id="nameInput">
 	                    </div>
 	                    <div class="input-gorup form-inline mt-3">
 	                        <label class="input-label">전화번호 </label>
-	                        <input type="text" class="form-control text-input" id="phoneNumber">
+	                        <input type="text" class="form-control text-input" id="phoneNumberInput">
 	                    </div>
 	               
 	                </div>
 	                <div class="d-flex justify-content-end">
-	                    <button class="btn btn-success mt-3 mr-5" id = "requestBtn">조회 하기</button>
+	                    <button class="btn btn-success mt-3 mr-5" id="searchBtn">조회 하기</button>
 	                </div>
 	            </div>
-
-			</article>
+	        </article>
 	        <article class="reservation-call d-flex justify-content-center align-items-center">
 	            <div>
 	                <h3>예약문의 : </h3>
@@ -77,58 +77,52 @@
 	    </footer>
 	
 	</div>
-	
-	
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-	
-	
-	<script>
-	
-		$(document).ready(function(){
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+<script>
+	$(document).ready(function() {
+		$("#searchBtn").on("click", function() {
 			
-			$("#requestBtn").on("click", function(){
-
-				
-				if($("#name").val() == '') {
-                    alert("이름을 입력하세요.");
-                    return;
-                }
-
-                if($("#phoneNumber").val() == '')   {
-                    alert("전화번호를 입력하세요.");
-                    return;
-                }
-
-                if(!$("#phoneNumber").val().startsWith("010"))   {
-                    alert("010으로 입력해주세요 ");
-                    return;
-                }
-                
-                let name = $("#name").val();
-                let phoneNumber = $("#phoneNumber").val();
-                
-				$.ajax({
-					type : "get"
-					, url :  "/ajax/booking/select"
-					, data : {"name" : name, "phoneNumber" : phoneNumber}
-					, success : function(data){
-						if(data.result == "success"){
-							alert("성공");
-						} else{
-							// 중복 아님
-							alert("실패");
-						}
+			let name = $("#nameInput").val();
+			let phoneNumber = $("#phoneNumberInput").val();
+			
+			if(name == "") {
+				alert("이름을 입력하세요");
+				return ;
+			}
+			
+			if(phoneNumber == "") {
+				alert("전화번호를 입력하세요");
+				return ;
+			}
+			
+			$.ajax({
+				type:"get"
+				, url:"/ajax/booking/search"
+				, data:{"name":name, "phoneNumber":phoneNumber}
+				, success:function(data) {
+					
+					if(data.result == "fail"){
+						alert("조회된 결과가 없습니다.");
+					} else {
+					
+					// {"id":2,"name":"김종국","headcount":4,"day":1,"date":"2025-08-03T15:00:00.000+00:00","phoneNumber":"010-1212-2121","state":"확정","createdAt":"2024-02-20T07:40:09.000+00:00","updatedAt":"2024-02-20T07:40:09.000+00:00"}	
+					alert("이름 : " + data.booking.name + "\n"
+							+ "날짜 : " + data.booking.date.substring(0, 10) + "\n"
+							+ "일수 : " + data.booking.day + "\n"
+							+ "숙박인원 : " + data.booking.headcount + "\n"
+							+ "상태 : " + data.booking.state);
 					}
-					, error : function(){
-						alert("에러");
-					}
-				});
-				
+				}	
+				, error:function() {
+					alert("조회 에러");
+				}
 			});
 		});
-	</script>
-
+		
+	});
+</script>
 </body>
 </html>

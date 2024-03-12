@@ -38,6 +38,7 @@
 				 , `day`
 				 , `date`
 				 , `phoneNumber`
+				 , `state`
 	 		)
  		
  		VALUE
@@ -47,10 +48,11 @@
 				 , #{day}
 				 , #{date}
 				 , #{phoneNumber}
+				 , #{state}
 	 		)
  	</insert>
  	
- 	<select id = "selectBooking" resultType="com.ham.spring.test.ajax.domain.Booking">
+ 	<select id = "selectBooking" parameterType="map" resultType="com.ham.spring.test.ajax.domain.Booking">
  		SELECT
  		 	`id`
 			 , `name`

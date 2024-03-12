@@ -10,8 +10,8 @@
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
        
 
-   <link rel="stylesheet" href="/booking/css/liststyle.css" type="text/css">
-    </head>
+<link rel="stylesheet" href="/booking/css/style.css" type="text/css">
+</head>
 <body>
 	
 	<div id="wrap" >
@@ -19,10 +19,10 @@
                 <div class="text-center display-4">통나무 팬션</div>
                 <nav class="mt-4">
                     <ul class="nav nav-fill">
-                        <li class="nav-item"><a class="nav-link" href="#">팬션소개</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">객실보기</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">예약안내</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
+                          <li class="nav-item"><a class="nav-link" href="#">팬션소개</a></li>
+	                <li class="nav-item"><a class="nav-link" href="#">객실보기</a></li>
+	                <li class="nav-item"><a class="nav-link" href="/ajax/booking/input">예약하기</a></li>
+	                <li class="nav-item"><a class="nav-link" href="/ajax/booking/list">예약목록</a></li>
                     </ul>
                 </nav>
             </header>
@@ -103,9 +103,9 @@
 					type : "get"
 					, url : "/ajax/booking/delete"
 					, data : {"id" : bookingId}
-					, success : function(data){
+					, success : function(data){ // responseBody에 있는것을 가져오는것
 						if(data.result == "success"){
-							location.reload();
+							location.reload(); // 새로고침
 						} else {
 							alert("실패");
 						}

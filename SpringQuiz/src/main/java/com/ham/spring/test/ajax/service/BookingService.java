@@ -33,15 +33,15 @@ public class BookingService {
 			, int day
 			, Date date
 			, String phoneNumber){
-		int count = bookingRepository.insertBooking(name, headcount, day, date, phoneNumber);
+		int count = bookingRepository.insertBooking(name, headcount, day, date, phoneNumber, "대기중");
+		// 여기서 직접 대기중 처리
 		return count;
 	}
-	
-	// 조회
-	public int inquiryBooking(String name
-			, String phoneNumber) {
-		int count = bookingRepository.selectBooking(name, phoneNumber);
-		return count;
+
+	// 이름과 전화번호를 전달받고 일치하는 예약정보를 돌려주는 기능
+	public Booking searchBooking(String nam, String phoneNumber) {
+		Booking booking = bookingRepository.selectBooking(nam, phoneNumber);
+		return booking;
 	}
 
 }

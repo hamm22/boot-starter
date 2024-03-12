@@ -6,7 +6,7 @@
 <title>예약하기</title>
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-   <link rel="stylesheet" href="/booking/css/inputstyle.css" type="text/css">
+<link rel="stylesheet" href="/booking/css/style.css" type="text/css">
 </head>
 <body>
 
@@ -15,10 +15,10 @@
                 <div class="text-center display-4">통나무 팬션</div>
                 <nav class="mt-4">
                     <ul class="nav nav-fill">
-                        <li class="nav-item"><a class="nav-link" href="#">팬션소개</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">객실보기</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">예약안내</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
+                         <li class="nav-item"><a class="nav-link" href="#">팬션소개</a></li>
+	                <li class="nav-item"><a class="nav-link" href="#">객실보기</a></li>
+	                <li class="nav-item"><a class="nav-link" href="/ajax/booking/input">예약하기</a></li>
+	                <li class="nav-item"><a class="nav-link" href="/ajax/booking/list">예약목록</a></li>
                     </ul>
                 </nav>
             </header>
@@ -105,6 +105,18 @@
 					alert("폰번호를 입력하세요");
 					return;
 				}
+				
+				// 숙박일수가 숫자가 아닌경우 true를 리텅
+				// is NaN(day)
+				// Not a number
+				if(is NaN(headcount)){
+					alert("숙박인원은 숫자만 입력 가능합니다.");
+				}
+				
+				if(is NaN(day)){
+					alert("숙박일수는 숫자만 입력 가능합니다.");
+				}
+				
 				$.ajax({
 						type : "get"
 						, url : "/ajax/booking/create"

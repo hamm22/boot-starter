@@ -21,10 +21,13 @@ public interface BookingRepository {
 				, @Param("headcount") int headcount
 				, @Param("day") int day
 				, @Param("date") Date date
-				, @Param("phoneNumber") String phoneNumber);
+				, @Param("phoneNumber") String phoneNumber
+				, @Param("state") String state); // state 빼도 되고 넣어도됌
 	
 	// 조회
-	public int selectBooking(@Param("name") String name
+	// 한행에 대한 조회 -> entity를 통해가져옴
+	// 여러행일 때는 list
+	public Booking selectBooking(@Param("name") String name
 			, @Param("phoneNumber") String phoneNumber);
 
 }

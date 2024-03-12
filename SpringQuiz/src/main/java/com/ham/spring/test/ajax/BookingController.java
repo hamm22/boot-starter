@@ -10,7 +10,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -64,7 +63,7 @@ public class BookingController {
 	
 	// 사용자 입력 API
 	@GetMapping("/create")
-	@ResponseBody
+	@ResponseBody // 없으면 jsp로 감, api로 가려면 있어야함
 	public Map<String, String> createBooking(@RequestParam("name") String name
 			, @RequestParam("headcount") int headcount
 			, @RequestParam("day") int day
@@ -82,27 +81,54 @@ public class BookingController {
 		return resultMap;
 	}
 	
-
-	@GetMapping("/select")
+	// 이름과 전화번호를 전달받고, 대응되는 예약 정보를 Response에 담는다.
+	// API는 jsp와 상관없이 예약정보만 가져옴
+	
+//	@GetMapping("/search")
+//	@ResponseBody
+//	public Map<String, Object> searchBooking(@RequestParam("name") String name
+//			, @RequestParam("phoneNumber") String phoneNumber) {
+//		
+//		Booking booking = bookingService.searchBooking(name, phoneNumber);
+//	// 조회 결과가 있는 경우 : {"result" : "successs" , "booking":(엔터티 객체 불러옴)}
+//	// 조회 결과가 없는 경우 : {"result" : "fail"}
+//		// value 차입 정확하지 않으면 object
+//		Map<String, Object> resultMap = new HashMap<>();
+//		if(booking != null) {
+//			resultMap.put("result", "success");
+//			resultMap.put("booking", booking);
+//		} else {
+//			resultMap.put("result", "fail");
+//		}
+//		
+//		// return booking; // 이렇게 하면  booking 키를 사용할 수 있음 엔터티 객체가 리턴
+//		return resultMap;
+//		
+//	}
+	
+	
+	// 예약조회 API
+	// 이름과 전화번호를 전달받고, 대응되는 예약 정보를 Response에 담는다.
+	@GetMapping("/search")
 	@ResponseBody
-	public Map<String, String> selectBookingList(@RequestParam("name") String name
-			, @RequestParam("phoneNumber") String phoneNumber) {
+	public Map<String, Object> searchBooking(@RequestParam("name") String name
+					, @RequestParam("phoneNumber") String phoneNumber){
 		
-		int count = bookingService.inquiryBooking(name, phoneNumber);
+		Booking booking = bookingService.searchBooking(name, phoneNumber);
+
+		// 조회 결과가 있는경우 : {"result" : "success", booking : {"id":2,"name":"김종국","headcount":4,"day":1,"date":"2025-08-03T15:00:00.000+00:00","phoneNumber":"010-1212-2121","state":"확정","createdAt":"2024-02-20T07:40:09.000+00:00","updatedAt":"2024-02-20T07:40:09.000+00:00"}	
 		
-		Map<String, String> resultMap = new HashMap<>();
+		// 조회 결과가 없는 경우 : {"result" : "fail"} 
+		// {"id":2,"name":"김종국","headcount":4,"day":1,"date":"2025-08-03T15:00:00.000+00:00","phoneNumber":"010-1212-2121","state":"확정","createdAt":"2024-02-20T07:40:09.000+00:00","updatedAt":"2024-02-20T07:40:09.000+00:00"}	
 		
-		if(count == 1) {
-			resultMap.put("result", "success");
+		Map<String, Object> resultMap = new HashMap<>();
+		if(booking != null) {
+			resultMap.put("result", "successs");
+			resultMap.put("booking", booking);
 		} else {
 			resultMap.put("result", "fail");
 		}
 		return resultMap;
-		
 	}
-
-	
-	
-	
 	
 }

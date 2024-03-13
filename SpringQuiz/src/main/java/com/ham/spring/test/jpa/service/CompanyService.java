@@ -47,9 +47,17 @@ public class CompanyService {
 	
 	public void deleteCompany(int id) {
 		
+// 		companyRepository.deleteById(id);
 		Optional<Company> optionalCompany = companyRepository.findById(id);
-		Company company = optionalCompany.orElse(null);
 		
-		companyRepository.delete(company);
+//		Company company = optionalCompany.orElse(null);
+//		
+//		if(company != null) {
+//		companyRepository.delete(company);
+//		}
+//  53번~56번까지 줄여서 이것을 사용할수 있음 : optionalCompany.ifPresent(company -> companyRepository.delete(company));		
+		
+		// 람다식
+		optionalCompany.ifPresent(company -> companyRepository.delete(company)); // null일때만 companyRepository.delete(company)수행됨
 	}
 }
